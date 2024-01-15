@@ -31,14 +31,26 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_Arm.m_spark.setSmartCurrentLimit(10);
+    m_Arm.m_spark.setSmartCurrentLimit(40);
+  }
+  
+  public void roboInit(){
   }
 
+  public void teleOperatedInit(){
+    m_Arm.resetEncoders();
+   
+  }
+  
   public void teleopPeriodic(){
 
-    double setpoint1 = -20; // when using relative encoder, use numbers in the set of -0.1 to 0.1
-    double setpoint2 = 40; // ^^ this should be a double
-    double setpoint3 = -62; // These numbers are for an absolute encoder
+    m_Arm.encoder_arm.getPosition();
+    SmartDashboard.putNumber("Encoder for Arm", m_Arm.encoder_arm.getPosition());
+    
+    
+    double setpoint1 = -0.03; 
+    double setpoint2 = 40;
+    double setpoint3 = -62; 
 
     if(opJoy.getBButton()){
       m_Arm.setGoal(setpoint1);
@@ -54,14 +66,12 @@ public class RobotContainer {
       m_Arm.enable();
     }
 
-    m_Arm.encoder_arm.getPosition();
-    SmartDashboard.putNumber("Encoder for Arm", m_Arm.encoder_arm.getPosition());
     
     
   }
-   public void disableArm(){
-      m_Arm.disable();
-    }
+  public void disableArm(){
+    m_Arm.disable();
+  }
 
   
 

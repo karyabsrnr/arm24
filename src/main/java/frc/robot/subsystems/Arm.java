@@ -24,7 +24,7 @@ public class Arm extends ProfiledPIDSubsystem {
     super(
         // The ProfiledPIDController used by the subsystem
         new ProfiledPIDController(
-            0.003,
+            0.35,
             0,
             0,
             // The motion profile constraints
@@ -35,6 +35,12 @@ public class Arm extends ProfiledPIDSubsystem {
   public void useOutput(double output, TrapezoidProfile.State setpoint) {
     // Use the output (and optionally the setpoint) here
    m_spark.set(output);
+  }
+
+  public void resetEncoders() {
+    encoder_arm.setPosition(-0);
+   
+   
   }
 
  public double getEncoderPos(){
