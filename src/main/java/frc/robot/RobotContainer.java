@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -31,7 +32,10 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
-    m_Arm.m_spark.setSmartCurrentLimit(40);
+    m_Arm.m_spark.setSmartCurrentLimit(10);
+    // public final JoystickButton aButton = new JoystickButton(opJoy,1);
+    // public final JoystickButton bButton = new JoystickButton(opJoy,2);
+    // public final JoystickButton xButton = new JoystickButton(opJoy, 3);
   }
   
   public void roboInit(){
@@ -47,24 +51,56 @@ public class RobotContainer {
     m_Arm.encoder_arm.getPosition();
     SmartDashboard.putNumber("Encoder for Arm", m_Arm.encoder_arm.getPosition());
     
-    
-    double setpoint1 = -0.03; 
-    double setpoint2 = 40;
-    double setpoint3 = -62; 
+    double setpoint1 = 20; 
+    // double setpoint2 = 40;
+    // double setpoint3 = -62; 
 
-    if(opJoy.getBButton()){
-      m_Arm.setGoal(setpoint1);
-      m_Arm.enable();
-    }else if(opJoy.getYButton()){
-      m_Arm.setGoal(setpoint2);
-      m_Arm.enable();
-    }else if(opJoy.getAButton()){
-      m_Arm.setGoal(0);
-      m_Arm.enable();
-    }else if(opJoy.getXButton()){
-      m_Arm.setGoal(setpoint3);
-      m_Arm.enable();
+    // thia controls the hand mechanism at the end of the arm
+    if(opJoy.getLeftBumperPressed()){
+      m_Arm.hand_spark.set(0.1);
     }
+    else if(opJoy.getLeftBumperReleased()){
+      m_Arm.hand_spark.set(0);
+    }
+
+    if(opJoy.getRightBumperPressed()){
+      m_Arm.hand_spark.set(-0.1);
+    }
+    else if(opJoy.getRightBumperReleased()){
+      m_Arm.hand_spark.set(0);
+    }
+// This controls the arm
+    if(opJoy.getAButtonPressed()){
+      m_Arm.enable();
+      m_Arm.setGoal(setpoint1);
+      
+    }
+    // else if(opJoy.getAButtonReleased()){
+    //   m_Arm.m_spark.set(0);
+    // }
+    if(opJoy.getBButtonPressed()){ //This is a backup in case we cannot get the 
+      m_Arm.m_spark.set(-0.1);//The elevator to stop at set points
+    }
+    else if(opJoy.getBButtonReleased()){
+      m_Arm.m_spark.set(0);
+    }
+
+
+   
+
+    // if(opJoy.getBButton()){
+    //   m_Arm.setGoal(setpoint1);
+    //   m_Arm.enable();
+    // }else if(opJoy.getYButton()){
+    //   m_Arm.setGoal(setpoint2);
+    //   m_Arm.enable();
+    // }else if(opJoy.getAButton()){
+    //   m_Arm.setGoal(0);
+    //   m_Arm.enable();
+    // }else if(opJoy.getXButton()){
+    //   m_Arm.setGoal(setpoint3);
+    //   m_Arm.enable();
+    // }
 
     
     
@@ -103,10 +139,7 @@ public class RobotContainer {
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    *  @return the command to run in autonomous
-   */
+   */  
 
-  
-
-  
 }
 
