@@ -39,6 +39,8 @@ public class RobotContainer {
   }
   
   public void roboInit(){
+
+
   }
 
   public void teleOperatedInit(){
@@ -51,56 +53,53 @@ public class RobotContainer {
     m_Arm.encoder_arm.getPosition();
     SmartDashboard.putNumber("Encoder for Arm", m_Arm.encoder_arm.getPosition());
     
-    double setpoint1 = 20; 
-    // double setpoint2 = 40;
-    // double setpoint3 = -62; 
+    double setpoint1 = -85; 
+    double setpoint2 = 45;
+    double setpoint3 = -10; 
 
-    // thia controls the hand mechanism at the end of the arm
-    if(opJoy.getLeftBumperPressed()){
-      m_Arm.hand_spark.set(0.1);
-    }
-    else if(opJoy.getLeftBumperReleased()){
-      m_Arm.hand_spark.set(0);
-    }
+//     // thia controls the hand mechanism at the end of the arm
+//     if(opJoy.getLeftBumperPressed()){
+//       m_Arm.hand_spark.set(0.1);
+//     }
+//     else if(opJoy.getLeftBumperReleased()){
+//       m_Arm.hand_spark.set(0);
+//     }
 
-    if(opJoy.getRightBumperPressed()){
-      m_Arm.hand_spark.set(-0.1);
-    }
-    else if(opJoy.getRightBumperReleased()){
-      m_Arm.hand_spark.set(0);
-    }
-// This controls the arm
-    if(opJoy.getAButtonPressed()){
-      m_Arm.enable();
-      m_Arm.setGoal(setpoint1);
+//     if(opJoy.getRightBumperPressed()){
+//       m_Arm.hand_spark.set(-0.1);
+//     }
+//     else if(opJoy.getRightBumperReleased()){
+//       m_Arm.hand_spark.set(0);
+//     }
+// // This controls the arm
+//     if(opJoy.getAButtonPressed()){
+//       m_Arm.enable();
+//       m_Arm.setGoal(setpoint1);
       
-    }
-    // else if(opJoy.getAButtonReleased()){
-    //   m_Arm.m_spark.set(0);
-    // }
-    if(opJoy.getBButtonPressed()){ //This is a backup in case we cannot get the 
-      m_Arm.m_spark.set(-0.1);//The elevator to stop at set points
-    }
-    else if(opJoy.getBButtonReleased()){
-      m_Arm.m_spark.set(0);
-    }
+//     }
+//     // else if(opJoy.getAButtonReleased()){
+//     //   m_Arm.m_spark.set(0);
+//     // }
+//     if(opJoy.getBButtonPressed()){ //This is a backup in case we cannot get the 
+//       m_Arm.m_spark.set(-0.1);//The elevator to stop at set points
+//     }
+//     else if(opJoy.getBButtonReleased()){
+//       m_Arm.m_spark.set(0);
+//     }
 
-
-   
-
-    // if(opJoy.getBButton()){
-    //   m_Arm.setGoal(setpoint1);
-    //   m_Arm.enable();
-    // }else if(opJoy.getYButton()){
-    //   m_Arm.setGoal(setpoint2);
-    //   m_Arm.enable();
-    // }else if(opJoy.getAButton()){
-    //   m_Arm.setGoal(0);
-    //   m_Arm.enable();
-    // }else if(opJoy.getXButton()){
-    //   m_Arm.setGoal(setpoint3);
-    //   m_Arm.enable();
-    // }
+    if(opJoy.getBButton()){
+      m_Arm.setGoal(setpoint1);
+      m_Arm.enable();
+    }else if(opJoy.getYButton()){
+      m_Arm.setGoal(setpoint2);
+      m_Arm.enable();
+    }else if(opJoy.getAButton()){
+      m_Arm.setGoal(0);
+      m_Arm.enable();
+    }else if(opJoy.getXButton()){
+      m_Arm.setGoal(setpoint3);
+      m_Arm.enable();
+    }
 
     
     
